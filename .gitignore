@@ -12,3 +12,4 @@ data/*.csv
 # etc...
 
 
+.DS_Store
