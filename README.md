@@ -1,151 +1,94 @@
 
-# 🎯 Real-Time Contextual Bandit Recommendation Engine  
-*A production-ready reinforcement learning engine for real-time personalized recommendations in rewarded mobile apps.*
+🎯 Real-Time Contextual Bandit Recommendation Engine
 
----
-
-## 🚀 Overview  
-This project implements a **real-time Contextual Bandit recommender system (LinUCB)** optimized for rewarded apps.  
-It selects the **next best action** to increase engagement, retention, and monetization.
-
-Supported high-value actions:
-- 🎁 Show bonus offer  
-- ⭐ Invite friend  
-- 📱 Suggest new app to explore  
-- 🔗 Deep link to store  
-
-The engine uses:
-✔️ User context  
-✔️ Online learning  
-✔️ Explore–exploit optimization  
-✔️ FastAPI microservice for real-time inference  
-
----
-
-## 🧠 Key Features  
-- **Synthetic user–action dataset generator**  
-- **LinUCB contextual bandit implementation**  
-- **Training pipeline** (learns action weights + confidence bounds)  
-- **FastAPI scoring API**  
-- **Persistent model storage** (`npz`)  
-- **Industry-level project structure**
-
----
-
-## 🏗 Architecture  
-
-
-A Reinforcement Learning system for real-time personalized recommendations in rewarded mobile apps.
+A production-grade reinforcement learning engine for real-time personalized recommendations in rewarded mobile apps.
 
 🚀 Overview
 
-This project implements a real-time recommendation engine based on Contextual Bandits (LinUCB) to recommend high-value actions such as:
+This project implements a real-time Contextual Bandit recommender system (LinUCB) that predicts the next best action to maximize:
 
-🎁 Show bonus offer
+Engagement
 
-⭐ Invite friend
+Retention
 
-📱 Suggest new app to explore
+Session depth
+
+Revenue per user
+
+Recommended actions include:
+
+🎁 Bonus offer
+
+⭐ Invite a friend
+
+📱 Suggest new app
 
 🔗 Deep link to store
 
-The engine uses user context + exploration/exploitation to pick the best next action in real time, backed by an online-learning model.
+🧠 Key Features
 
-This repository includes:
+Synthetic dataset generator (user → context → reward)
 
-✅ Data simulation
-✅ Training of a LinUCB contextual bandit
-✅ Action scoring API using FastAPI
-✅ Real-time recommendation endpoint
-✅ Reproducible environment + clean project structure
+LinUCB contextual bandit implementation
 
-🧠 Architecture
+Training pipeline with reproducible results
 
+Real-time scoring API (FastAPI)
+
+Online-learning architecture
+
+Persistent model storage (npz)
+
+Industry-level project structure
+
+🏗 Architecture
+📌 High-Level Flow
+User Context
+      ↓
+Feature Vector
+      ↓
+LinUCB Model
+      ↓
+UCB Scores
+      ↓
+Best Action Selected
+
+📂 Project Structure
 realtime-reco-bandit-engine/
 │
 ├── src/
-│ ├── generate_bandit_data.py # Generates synthetic interaction data
-│ ├── train_linucb.py # Trains LinUCB model
-│ ├── linucb_bandit.py # Bandit algorithm implementation
+│   ├── generate_bandit_data.py    # Generates synthetic training data
+│   ├── train_linucb.py            # Trains the LinUCB model
+│   ├── linucb_bandit.py           # LinUCB implementation (core logic)
 │
-├── api_recommender.py # FastAPI microservice (real-time recommendations)
+├── api_recommender.py             # FastAPI microservice for real-time recommendations
 ├── requirements.txt
-├── README.md
-└── .gitignore
+└── README.md
 
-User Context → Feature Vector → LinUCB Model → UCB Scores → Selected Action
-
-A high-level view:
-
-src/generate_bandit_data.py     → Creates training data
-src/linucb_bandit.py            → LinUCB implementation
-src/train_linucb.py             → Trains the bandit & saves model
-api_recommender.py              → FastAPI real-time scoring API
-data/                           → Saved bandit model (linucb_model.npz)
-
-📦 Installation
-
-1. Clone the repository
-
-git clone git@github.com:juanenciso/Real-Time-Contextual-Bandit-Recommendation-Engine.git
+💾 Installation
+git clone https://github.com/juanenciso/Real-Time-Contextual-Bandit-Recommendation-Engine.git
 cd Real-Time-Contextual-Bandit-Recommendation-Engine
-
-2. Create and activate the virtual environment
 
 python3 -m venv .venv
 source .venv/bin/activate
 
-3. Install dependencies
-
 pip install -r requirements.txt
 
-🛠 Training the LinUCB Bandit
-
-Generate simulated bandit data
-
+🧪 Step 1 — Generate Synthetic Data
 python src/generate_bandit_data.py
 
-This produces:
-
-data/bandit_simulated.csv
-
-Train the LinUCB model
-
+🏋️ Step 2 — Train the LinUCB Model
 python src/train_linucb.py
 
-This saves the trained model:
+
+This creates:
 
 data/linucb_model.npz
 
-⚡ Run the API Server
-
+⚡ Step 3 — Run the API Server
 uvicorn api_recommender:app --reload --port 8020
 
-Server runs at:
-
-👉 http://127.0.0.1:8020
-
-🔍 API Endpoints
-
-Health check
-
-GET /health
-
-Response:
-
-{
-  "status": "ok",
-  "model_loaded": true,
-  "n_actions": 4,
-  "alpha": 1.0
-}
-
-🎯 Real-Time Recommendation Endpoint
-
-POST /recommend_action
-
-Example request:
-
+📡 Step 4 — Example API Request
 curl -X POST "http://127.0.0.1:8020/recommend_action" \
   -H "Content-Type: application/json" \
   -d '{
@@ -159,39 +102,36 @@ curl -X POST "http://127.0.0.1:8020/recommend_action" \
     "avg_session_length": 180.0
   }'
 
+
 Example response:
 
 {
   "user_id": "u123",
   "recommended_action": "show_bonus_offer",
-  "ucb_score": 1.0327,
-  "scores": {
-    "show_bonus_offer": 1.0327,
-    "suggest_new_app": 0.9185,
-    "invite_friend": 0.9970,
-    "deep_link_to_store": 1.0113
-  },
-  "alpha": 1.0
+  "ucb_score": 1.03,
+  "scores": {...}
 }
 
-🧮 Model: LinUCB Explained
+📊 Why This Project Stands Out
 
-The LinUCB algorithm balances:
+This project demonstrates real production-level ML engineering skills, including:
 
-Exploration: testing new actions
+Reinforcement learning (Contextual Bandits)
 
-Exploitation: choosing best known action
+Online inference
 
-Optimization principle:
+Vectorized model serving
 
-UCB = expected_reward + α * uncertainty
+Feature engineering
 
-Where:
+Experiment reproducibility
 
-expected_reward = θᵀx
+Clean architecture
 
-uncertainty = sqrt(xᵀ A⁻¹ x)
+Deployable microservice (FastAPI + Uvicorn)
 
-This allows the model to adapt in real time as new users interact with the system.
+👨‍💻 Author
 
+Juan Sebastián Enciso García, PhD
+Data Scientist • ML Engineer
 
