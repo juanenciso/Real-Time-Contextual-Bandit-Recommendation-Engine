@@ -1,4 +1,39 @@
-🎯 Real-Time Contextual Bandit Recommendation Engine
+
+# 🎯 Real-Time Contextual Bandit Recommendation Engine  
+*A production-ready reinforcement learning engine for real-time personalized recommendations in rewarded mobile apps.*
+
+---
+
+## 🚀 Overview  
+This project implements a **real-time Contextual Bandit recommender system (LinUCB)** optimized for rewarded apps.  
+It selects the **next best action** to increase engagement, retention, and monetization.
+
+Supported high-value actions:
+- 🎁 Show bonus offer  
+- ⭐ Invite friend  
+- 📱 Suggest new app to explore  
+- 🔗 Deep link to store  
+
+The engine uses:
+✔️ User context  
+✔️ Online learning  
+✔️ Explore–exploit optimization  
+✔️ FastAPI microservice for real-time inference  
+
+---
+
+## 🧠 Key Features  
+- **Synthetic user–action dataset generator**  
+- **LinUCB contextual bandit implementation**  
+- **Training pipeline** (learns action weights + confidence bounds)  
+- **FastAPI scoring API**  
+- **Persistent model storage** (`npz`)  
+- **Industry-level project structure**
+
+---
+
+## 🏗 Architecture  
+
 
 A Reinforcement Learning system for real-time personalized recommendations in rewarded mobile apps.
 
@@ -25,6 +60,18 @@ This repository includes:
 ✅ Reproducible environment + clean project structure
 
 🧠 Architecture
+
+realtime-reco-bandit-engine/
+│
+├── src/
+│ ├── generate_bandit_data.py # Generates synthetic interaction data
+│ ├── train_linucb.py # Trains LinUCB model
+│ ├── linucb_bandit.py # Bandit algorithm implementation
+│
+├── api_recommender.py # FastAPI microservice (real-time recommendations)
+├── requirements.txt
+├── README.md
+└── .gitignore
 
 User Context → Feature Vector → LinUCB Model → UCB Scores → Selected Action
 
