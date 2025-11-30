@@ -1,0 +1,14 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual env
+.venv/
+
+# Data
+data/*.npz
+data/*.pt
+data/*.csv
+# etc...
+
+
