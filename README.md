@@ -1,9 +1,11 @@
 
-🎯 Real-Time Contextual Bandit Recommendation Engine
+## 🎯 Real-Time Contextual Bandit Recommendation Engine
 
 A production-grade reinforcement learning engine for real-time personalized recommendations in rewarded mobile apps.
 
-🚀 Overview
+--- 
+
+## 🚀 Overview
 
 This project implements a real-time Contextual Bandit recommender system (LinUCB) that predicts the next best action to maximize:
 
@@ -15,17 +17,9 @@ Session depth
 
 Revenue per user
 
-Recommended actions include:
+---
 
-🎁 Bonus offer
-
-⭐ Invite a friend
-
-📱 Suggest new app
-
-🔗 Deep link to store
-
-🧠 Key Features
+## 🧠 Key Features
 
 Synthetic dataset generator (user → context → reward)
 
@@ -41,7 +35,8 @@ Persistent model storage (npz)
 
 Industry-level project structure
 
-🏗 Architecture
+---
+## 🏗 Architecture
 📌 High-Level Flow
 User Context
       ↓
@@ -53,7 +48,8 @@ UCB Scores
       ↓
 Best Action Selected
 
-📂 Project Structure
+---
+## 📂 Project Structure
 realtime-reco-bandit-engine/
 │
 ├── src/
@@ -65,7 +61,9 @@ realtime-reco-bandit-engine/
 ├── requirements.txt
 └── README.md
 
-💾 Installation
+---
+## 💾 Installation
+```
 git clone https://github.com/juanenciso/Real-Time-Contextual-Bandit-Recommendation-Engine.git
 cd Real-Time-Contextual-Bandit-Recommendation-Engine
 
@@ -73,22 +71,30 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 pip install -r requirements.txt
+```
 
 🧪 Step 1 — Generate Synthetic Data
+```
 python src/generate_bandit_data.py
+```
 
 🏋️ Step 2 — Train the LinUCB Model
+```
 python src/train_linucb.py
-
+```
 
 This creates:
-
+```
 data/linucb_model.npz
+```
 
 ⚡ Step 3 — Run the API Server
+```
 uvicorn api_recommender:app --reload --port 8020
+```
 
 📡 Step 4 — Example API Request
+```
 curl -X POST "http://127.0.0.1:8020/recommend_action" \
   -H "Content-Type: application/json" \
   -d '{
@@ -101,18 +107,18 @@ curl -X POST "http://127.0.0.1:8020/recommend_action" \
     "recent_engagement": 12,
     "avg_session_length": 180.0
   }'
-
+```
 
 Example response:
-
+```
 {
   "user_id": "u123",
   "recommended_action": "show_bonus_offer",
   "ucb_score": 1.03,
   "scores": {...}
 }
-
-📊 Why This Project Stands Out
+```
+## 📊 Why This Project Stands Out
 
 This project demonstrates real production-level ML engineering skills, including:
 
@@ -130,7 +136,7 @@ Clean architecture
 
 Deployable microservice (FastAPI + Uvicorn)
 
-👨‍💻 Author
+## 👨‍💻 Author
 
 Juan Sebastián Enciso García, PhD
 Data Scientist • ML Engineer
